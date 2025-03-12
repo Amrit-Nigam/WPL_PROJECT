@@ -1,8 +1,6 @@
--- Create database
 CREATE DATABASE IF NOT EXISTS orion_racing_db;
 USE orion_racing_db;
 
--- Users table
 CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
@@ -16,7 +14,6 @@ CREATE TABLE users (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- Teams table
 CREATE TABLE teams (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
@@ -26,7 +23,6 @@ CREATE TABLE teams (
   FOREIGN KEY (lead_id) REFERENCES users(id) ON DELETE SET NULL
 );
 
--- Team members table
 CREATE TABLE team_members (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
@@ -37,7 +33,6 @@ CREATE TABLE team_members (
   UNIQUE KEY (user_id, team_id)
 );
 
--- Projects table
 CREATE TABLE projects (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
@@ -51,7 +46,6 @@ CREATE TABLE projects (
   FOREIGN KEY (team_id) REFERENCES teams(id) ON DELETE SET NULL
 );
 
--- Tasks table
 CREATE TABLE tasks (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(100) NOT NULL,
@@ -71,7 +65,6 @@ CREATE TABLE tasks (
   FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL
 );
 
--- Deadlines table
 CREATE TABLE deadlines (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(100) NOT NULL,
@@ -85,7 +78,6 @@ CREATE TABLE deadlines (
   FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL
 );
 
--- Announcements table
 CREATE TABLE announcements (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(100) NOT NULL,
@@ -97,7 +89,6 @@ CREATE TABLE announcements (
   FOREIGN KEY (posted_by) REFERENCES users(id) ON DELETE SET NULL
 );
 
--- Resources table
 CREATE TABLE resources (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(100) NOT NULL,
@@ -111,7 +102,6 @@ CREATE TABLE resources (
   FOREIGN KEY (uploaded_by) REFERENCES users(id) ON DELETE SET NULL
 );
 
--- Car specifications table
 CREATE TABLE car_specifications (
   id INT AUTO_INCREMENT PRIMARY KEY,
   car_name VARCHAR(100) NOT NULL,
@@ -132,7 +122,6 @@ CREATE TABLE car_specifications (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- Sponsors table
 CREATE TABLE sponsors (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
@@ -145,7 +134,6 @@ CREATE TABLE sponsors (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- Gallery table
 CREATE TABLE gallery (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(100) NOT NULL,
@@ -158,7 +146,6 @@ CREATE TABLE gallery (
   FOREIGN KEY (uploaded_by) REFERENCES users(id) ON DELETE SET NULL
 );
 
--- Team achievements table
 CREATE TABLE achievements (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(100) NOT NULL,
@@ -170,9 +157,7 @@ CREATE TABLE achievements (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Insert sample data for testing
 INSERT INTO users (name, email, password, role, department) VALUES
 ('Admin User', 'admin@orionracing.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Admin', 'Management'),
 ('Team Lead', 'lead@orionracing.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Team Lead', 'Engineering'),
 ('John Member', 'john@orionracing.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Member', 'Mechanical');
-
