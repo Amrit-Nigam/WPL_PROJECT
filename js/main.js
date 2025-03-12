@@ -113,3 +113,57 @@ document.addEventListener("DOMContentLoaded", () => {
   animateOnScroll() // Run once on page load
 })
 
+// Hamburger Menu Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const circularNav = document.querySelector('.circular-nav');
+    const navOverlay = document.querySelector('.nav-overlay');
+    
+    // Make sure circular nav is hidden initially
+    circularNav.classList.remove('active');
+    navOverlay.classList.remove('active');
+    
+    hamburgerMenu.addEventListener('click', function() {
+        // Toggle active class for hamburger animation
+        this.classList.toggle('active');
+        
+        // Toggle circular nav visibility
+        circularNav.classList.toggle('active');
+        
+        // Toggle overlay visibility
+        navOverlay.classList.toggle('active');
+        
+        // Toggle body class to prevent scrolling when nav is open
+        document.body.classList.toggle('nav-active');
+    });
+    
+    // Close menu when clicking on a navigation link
+    const navLinks = document.querySelectorAll('.nav-items a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            hamburgerMenu.classList.remove('active');
+            circularNav.classList.remove('active');
+            navOverlay.classList.remove('active');
+            document.body.classList.remove('nav-active');
+        });
+    });
+    
+    // Close navigation when clicking on overlay
+    navOverlay.addEventListener('click', function() {
+        hamburgerMenu.classList.remove('active');
+        circularNav.classList.remove('active');
+        navOverlay.classList.remove('active');
+        document.body.classList.remove('nav-active');
+    });
+    
+    // Close navigation when pressing Escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && circularNav.classList.contains('active')) {
+            hamburgerMenu.classList.remove('active');
+            circularNav.classList.remove('active');
+            navOverlay.classList.remove('active');
+            document.body.classList.remove('nav-active');
+        }
+    });
+});
+
