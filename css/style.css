@@ -231,15 +231,15 @@ ul {
   transform: scale(1.1);
 }
 
-/* Position nav items in a circle */
+/* Position nav items in a circle - updated for 7 items */
 .nav-item[data-index="0"] {
   top: 0;
   left: 50%;
   transform: translateX(-50%) translateY(-40px);
 }
 .nav-item[data-index="1"] {
-  top: 14.6%;
-  right: 14.6%;
+  top: 20%;
+  right: 20%;
   transform: rotate(45deg);
 }
 .nav-item[data-index="1"] a {
@@ -251,8 +251,8 @@ ul {
   transform: translateX(40px);
 }
 .nav-item[data-index="3"] {
-  bottom: 14.6%;
-  right: 14.6%;
+  bottom: 20%;
+  right: 20%;
   transform: rotate(-45deg);
 }
 .nav-item[data-index="3"] a {
@@ -264,24 +264,19 @@ ul {
   transform: translateX(-50%) translateY(40px);
 }
 .nav-item[data-index="5"] {
-  bottom: 14.6%;
-  left: 14.6%;
+  bottom: 20%;
+  left: 20%;
   transform: rotate(45deg);
 }
 .nav-item[data-index="5"] a {
   transform: rotate(-45deg);
 }
 .nav-item[data-index="6"] {
-  top: 50%;
-  left: 0;
-  transform: translateX(-40px);
-}
-.nav-item[data-index="7"] {
-  top: 14.6%;
-  left: 14.6%;
+  top: 20%;
+  left: 20%;
   transform: rotate(-45deg);
 }
-.nav-item[data-index="7"] a {
+.nav-item[data-index="6"] a {
   transform: rotate(45deg);
 }
 
