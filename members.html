@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sponsors - Orion Racing India</title>
+    <title>Members - Orion Racing India</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/members.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -22,10 +23,10 @@
                         <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About</a></li>
                         <li><a href="car.html">Our Car</a></li>
-                        <li><a href="sponsors.html" class="active">Sponsors</a></li>
+                        <li><a href="sponsors.html">Sponsors</a></li>
                         <li><a href="gallery.html">Gallery</a></li>
                         <li><a href="team.html">Team</a></li>
-                        <li><a href="members.html">Members</a></li>
+                        <li><a href="members.html" class="active">Members</a></li>
                     </ul>
                 </nav>
                 <button class="mobile-menu-toggle">
@@ -35,316 +36,51 @@
         </div>
     </header>
 
-    <!-- Page Banner -->
-    <section class="page-banner">
+    <!-- Login Section -->
+    <section class="login-section">
         <div class="container">
-            <h1>SPONSORS</h1>
-            <div class="breadcrumbs">
-                <a href="index.html">Home</a> / <span>Sponsors</span>
+            <div class="login-container">
+                <div class="login-box">
+                    <div class="login-header">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXLRoG-YUGvujtHEQ3aMOjiE8PjhJFETDwoA&s" alt="Orion Racing Logo">
+                        <h2>TEAM MEMBER LOGIN</h2>
+                    </div>
+                    
+                    <div class="login-form">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="password" name="password" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-options">
+                            <div class="remember-me">
+                                <input type="checkbox" id="remember" name="remember">
+                                <label for="remember">Remember me</label>
+                            </div>
+                            <a href="#" class="forgot-password">Forgot Password?</a>
+                        </div>
+                        
+                        <button type="submit" class="login-btn" id="login-button">LOGIN</button>
+                    </div>
+                    
+                    <div class="login-footer">
+                        <p>Need an account? <a href="mailto:orionracing@somaiya.edu">Email the team lead</a></p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-
-    <!-- Sponsors Section -->
-    <section class="sponsors-page">
-        <div class="container">
-            <div class="section-header">
-                <h2>OUR VALUED SPONSORS</h2>
-                <div class="divider"></div>
-                <p>We are grateful for the support of our sponsors who make our journey possible. Their contributions enable us to design, build, and race our formula-style vehicles in international competitions.</p>
-            </div>
-            
-            <div class="sponsors-tiers">
-                <div class="tier platinum-tier">
-                    <h3>PLATINUM SPONSORS</h3>
-                    <div class="tier-sponsors">
-                        <div class="sponsor-card">
-                            <div class="sponsor-logo">
-                                <img src="https://www.logo.wine/a/logo/Tesla%2C_Inc./Tesla%2C_Inc.-Logomark%26Wordmark-Black-Logo.wine.svg" alt="Tesla">
-                            </div>
-                            <div class="sponsor-info">
-                                <h4>Tesla, Inc.</h4>
-                                <p>Supporting us with electric powertrain components and technical expertise</p>
-                                <a href="#" class="sponsor-link">Visit Website <i class="fas fa-external-link-alt"></i></a>
-                            </div>
-                        </div>
-                        <div class="sponsor-card">
-                            <div class="sponsor-logo">
-                                <img src="https://www.logo.wine/a/logo/Tesla%2C_Inc./Tesla%2C_Inc.-Logomark%26Wordmark-Black-Logo.wine.svg" alt="Sponsor 2">
-                            </div>
-                            <div class="sponsor-info">
-                                <h4>Platinum Sponsor</h4>
-                                <p>Supporting us with key technologies and components</p>
-                                <a href="#" class="sponsor-link">Visit Website <i class="fas fa-external-link-alt"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="tier gold-tier">
-                    <h3>GOLD SPONSORS</h3>
-                    <div class="tier-sponsors">
-                        <div class="sponsor-card">
-                            <div class="sponsor-logo">
-                                <img src="https://www.logo.wine/a/logo/Tesla%2C_Inc./Tesla%2C_Inc.-Logomark%26Wordmark-Black-Logo.wine.svg" alt="Sponsor 3">
-                            </div>
-                            <div class="sponsor-info">
-                                <h4>Gold Sponsor 1</h4>
-                                <p>Providing materials and technical expertise</p>
-                                <a href="#" class="sponsor-link">Visit Website <i class="fas fa-external-link-alt"></i></a>
-                            </div>
-                        </div>
-                        <div class="sponsor-card">
-                            <div class="sponsor-logo">
-                                <img src="https://www.logo.wine/a/logo/Tesla%2C_Inc./Tesla%2C_Inc.-Logomark%26Wordmark-Black-Logo.wine.svg" alt="Sponsor 4">
-                            </div>
-                            <div class="sponsor-info">
-                                <h4>Gold Sponsor 2</h4>
-                                <p>Supporting our aerodynamics development</p>
-                                <a href="#" class="sponsor-link">Visit Website <i class="fas fa-external-link-alt"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="tier silver-tier">
-                    <h3>SILVER SPONSORS</h3>
-                    <div class="tier-sponsors">
-                        <div class="sponsor-card">
-                            <div class="sponsor-logo">
-                                <img src="https://www.logo.wine/a/logo/Tesla%2C_Inc./Tesla%2C_Inc.-Logomark%26Wordmark-Black-Logo.wine.svg" alt="Sponsor 5">
-                            </div>
-                            <div class="sponsor-info">
-                                <h4>Silver Sponsor 1</h4>
-                                <p>Providing suspension components</p>
-                                <a href="#" class="sponsor-link">Visit Website <i class="fas fa-external-link-alt"></i></a>
-                            </div>
-                        </div>
-                        <div class="sponsor-card">
-                            <div class="sponsor-logo">
-                                <img src="https://www.logo.wine/a/logo/Tesla%2C_Inc./Tesla%2C_Inc.-Logomark%26Wordmark-Black-Logo.wine.svg" alt="Sponsor 6">
-                            </div>
-                            <div class="sponsor-info">
-                                <h4>Silver Sponsor 2</h4>
-                                <p>Supporting our electronics development</p>
-                                <a href="#" class="sponsor-link">Visit Website <i class="fas fa-external-link-alt"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="become-sponsor">
-                <h3>BECOME A SPONSOR</h3>
-                <div class="divider"></div>
-                <p>Partner with Orion Racing India and help us achieve excellence in Formula Student competitions. As a sponsor, you'll gain exposure to engineering talent, brand visibility at international events, and association with innovation and excellence.</p>
-                
-                <div class="sponsor-benefits">
-                    <div class="benefit-item">
-                        <i class="fas fa-globe"></i>
-                        <h4>Global Exposure</h4>
-                        <p>Your brand will be featured at international competitions across the globe</p>
-                    </div>
-                    <div class="benefit-item">
-                        <i class="fas fa-graduation-cap"></i>
-                        <h4>Access to Talent</h4>
-                        <p>Connect with motivated engineering students and future industry leaders</p>
-                    </div>
-                    <div class="benefit-item">
-                        <i class="fas fa-handshake"></i>
-                        <h4>Corporate Social Responsibility</h4>
-                        <p>Support engineering education and innovation in motorsport</p>
-                    </div>
-                </div>
-                
-                <a href="mailto:orionracing@somaiya.edu" class="cta-btn">EMAIL US TO SPONSOR</a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Additional CSS for this page -->
-    <style>
-        .sponsors-page {
-            padding: 80px 0;
-        }
-        
-        .sponsors-tiers {
-            margin-top: 50px;
-        }
-        
-        .tier {
-            margin-bottom: 60px;
-        }
-        
-        .tier h3 {
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .tier h3:after {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-        }
-        
-        .platinum-tier h3:after {
-            background-color: #e5e4e2;
-        }
-        
-        .gold-tier h3:after {
-            background-color: #ffd700;
-        }
-        
-        .silver-tier h3:after {
-            background-color: #c0c0c0;
-        }
-        
-        .tier-sponsors {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 30px;
-        }
-        
-        .sponsor-card {
-            display: flex;
-            background-color: var(--secondary-color);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            transition: var(--transition);
-        }
-        
-        .sponsor-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        .sponsor-logo {
-            width: 40%;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: white;
-        }
-        
-        .sponsor-logo img {
-            max-width: 100%;
-            max-height: 150px;
-        }
-        
-        .sponsor-info {
-            width: 60%;
-            padding: 20px;
-        }
-        
-        .sponsor-info h4 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
-        
-        .sponsor-info p {
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-        }
-        
-        .sponsor-link {
-            color: var(--primary-color);
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-        }
-        
-        .sponsor-link i {
-            margin-left: 5px;
-            font-size: 0.8rem;
-        }
-        
-        .sponsor-link:hover {
-            text-decoration: underline;
-        }
-        
-        .become-sponsor {
-            margin-top: 80px;
-            text-align: center;
-            padding: 50px 30px;
-            background-color: var(--secondary-color);
-            border-radius: 10px;
-        }
-        
-        .become-sponsor h3 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-        
-        .become-sponsor p {
-            max-width: 800px;
-            margin: 0 auto 40px;
-            font-size: 1.1rem;
-        }
-        
-        .sponsor-benefits {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-        }
-        
-        .benefit-item {
-            padding: 30px 20px;
-            background-color: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            transition: var(--transition);
-        }
-        
-        .benefit-item:hover {
-            transform: translateY(-10px);
-            background-color: rgba(0, 0, 0, 0.3);
-        }
-        
-        .benefit-item i {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-        
-        .benefit-item h4 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-        }
-        
-        .benefit-item p {
-            font-size: 1rem;
-            margin: 0;
-        }
-        
-        @media (max-width: 992px) {
-            .tier-sponsors {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .sponsor-card {
-                flex-direction: column;
-            }
-            
-            .sponsor-logo, .sponsor-info {
-                width: 100%;
-            }
-            
-            .become-sponsor h3 {
-                font-size: 2rem;
-            }
-        }
-    </style>
 
     <!-- Footer -->
     <footer class="main-footer">
@@ -386,5 +122,7 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/members.js"></script>
 </body>
 </html>
+
