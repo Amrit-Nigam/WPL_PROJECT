@@ -11,9 +11,36 @@
     <div class="landing-container">
         <div class="background-overlay"></div>
         
+        <!-- Slideshow container -->
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img src="images/Landing Page/AutoX.JPG" style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="images/Landing Page/Batata.jpg" style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="images/Landing Page/crmr.JPG" style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="images/Landing Page/endurance.JPG" style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="images/Landing Page/eti.JPG" style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="images/Landing Page/Team.JPG" style="width:100%">
+            </div>
+        </div>
+        
         <!-- Logo -->
         <div class="logo">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXLRoG-YUGvujtHEQ3aMOjiE8PjhJFETDwoA&s" alt="Orion Racing Logo">
+            <img src="images/Logo.png" alt="Orion Racing Logo">
         </div>
         
         <!-- Hamburger Menu Button -->
@@ -110,5 +137,23 @@
     </footer> -->
     
     <script src="js/main.js"></script>
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let slides = document.getElementsByClassName("mySlides");
+            
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}
+            
+            slides[slideIndex-1].style.display = "block";
+            setTimeout(showSlides, 5000); // Change image every 5 seconds
+        }
+    </script>
 </body>
 </html>
