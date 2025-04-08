@@ -516,7 +516,7 @@ ul {
 /* Footer */
 .main-footer {
   background-color: var(--secondary-color);
-  padding: 80px 0 20px;
+  padding: 60px 0 20px;
   position: relative;
 }
 
@@ -524,71 +524,65 @@ ul {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 40px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
+/* Updated footer logo styles to be more subtle */
 .footer-logo {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  opacity: 0.8;
 }
 
 .footer-logo img {
-  margin-bottom: 15px;
-}
-
-.footer-logo h3 {
-  font-size: 1.5rem;
-}
-
-.footer-links h4,
-.footer-contact h4 {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-  color: var(--primary-color);
-}
-
-.footer-links ul li {
+  height: 50px; /* Reduced from original size */
+  width: auto;
   margin-bottom: 10px;
-}
-
-.footer-links ul li a {
-  opacity: 0.8;
+  filter: grayscale(30%) brightness(90%); /* Makes the logo more subtle */
   transition: var(--transition);
 }
 
-.footer-links ul li a:hover {
-  opacity: 1;
+.footer-logo h3 {
+  font-size: 1.2rem; /* Reduced from 1.5rem */
+  font-weight: 400; /* Made lighter */
+  opacity: 0.9;
+  color: var(--text-color);
+  margin-top: 5px;
+}
+
+/* Other footer sections */
+.footer-links h4,
+.footer-contact h4 {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
   color: var(--primary-color);
-  padding-left: 5px;
+  font-weight: 500;
 }
 
 .footer-contact p {
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
-}
-
-.footer-contact p i {
-  margin-right: 10px;
-  color: var(--primary-color);
+  opacity: 0.8;
 }
 
 .footer-social {
   display: flex;
-  gap: 15px;
-  margin-top: 20px;
+  gap: 12px;
+  margin-top: 15px;
 }
 
 .footer-social a {
-  width: 40px;
-  height: 40px;
+  width: 35px; /* Reduced size */
+  height: 35px; /* Reduced size */
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
   transition: var(--transition);
+  opacity: 0.8;
 }
 
 .footer-social a:hover {
@@ -604,7 +598,7 @@ ul {
 
 .footer-bottom p {
   opacity: 0.7;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 /* Hamburger Menu Styles */
@@ -789,6 +783,19 @@ ul {
   
   .hamburger-menu {
     display: block;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .footer-logo {
+    align-items: center;
+  }
+  
+  .footer-social {
+    justify-content: center;
   }
 }
 
