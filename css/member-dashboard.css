@@ -1,0 +1,168 @@
+.dashboard-section {
+    padding: 100px 0 50px;
+    background-color: #1a1a1a;
+    min-height: 100vh;
+    color: #ffffff;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 30px;
+}
+
+/* Profile Card Styles */
+.profile-card {
+    background: rgba(32, 33, 36, 0.9);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.profile-image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 3px solid #007bff;
+}
+
+.profile-info h2 {
+    margin: 0;
+    color: #ffffff;
+}
+
+.profile-info .role {
+    color: #007bff;
+    font-size: 0.9rem;
+    margin: 5px 0;
+}
+
+.profile-info .department {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+    margin-bottom: 20px;
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 10px 0;
+}
+
+/* Tasks Section Styles */
+.tasks-section {
+    background: rgba(32, 33, 36, 0.9);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.task-item {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.task-header h4 {
+    color: #ffffff;
+    margin: 0;
+}
+
+.priority {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.priority.high {
+    background: rgba(198, 40, 40, 0.2);
+    color: #ff4444;
+}
+
+.priority.medium {
+    background: rgba(239, 108, 0, 0.2);
+    color: #ffa726;
+}
+
+.task-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.status.pending {
+    background: rgba(21, 101, 192, 0.2);
+    color: #42a5f5;
+}
+
+.status.in-progress {
+    background: rgba(46, 125, 50, 0.2);
+    color: #66bb6a;
+}
+
+/* Progress Section Styles */
+.progress-section {
+    background: rgba(32, 33, 36, 0.9);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    grid-column: 1 / -1;
+}
+
+.progress-section h3,
+.tasks-section h3 {
+    color: #ffffff;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.progress {
+    height: 100%;
+    background: #007bff;
+    border-radius: 4px;
+}
+
+.stat-label {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+}
+
+.stat-value {
+    color: #007bff;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
