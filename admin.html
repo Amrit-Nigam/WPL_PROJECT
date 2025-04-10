@@ -10,6 +10,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <script>
+        // Add this at the top of the body
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simple session check - in real app, use proper authentication
+            if (!sessionStorage.getItem('userType') || sessionStorage.getItem('userType') !== 'admin') {
+                window.location.href = 'members.html';
+            }
+        });
+    </script>
     <header class="page-header">
         <div class="container">
             <div class="header-content">
@@ -37,15 +46,7 @@
                         <button class="filter-btn active">All</button>
                         <button class="filter-btn">Mechanical</button>
                         <button class="filter-btn">Electronics</button>
-                        <button class="filter-btn">Marketing<
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            /button>
+                        <button class="filter-btn">Marketing</button>
                     </div>
                     
                     <div class="members-list">
@@ -137,9 +138,30 @@
     // Logout functionality
     const logoutBtn = document.getElementById('logout');
     logoutBtn.addEventListener('click', function() {
+        sessionStorage.removeItem('userType');
         window.location.href = 'index.html';
     });
 });
     </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if user is logged in as admin
+        const userType = sessionStorage.getItem('userType');
+        if (!userType || userType !== 'admin') {
+            window.location.href = 'members.html';
+            return;
+        }
+
+        // Only add logout event listener if we haven't been redirected
+        const logoutBtn = document.getElementById('logout');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                sessionStorage.removeItem('userType');
+                window.location.href = 'index.html';
+            });
+        }
+    });
+</script>
 </body>
 </html>

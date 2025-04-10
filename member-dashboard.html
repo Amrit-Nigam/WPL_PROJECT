@@ -11,6 +11,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if user is logged in as member
+        const userType = sessionStorage.getItem('userType');
+        if (!userType || userType !== 'member') {
+            window.location.href = 'members.html';
+            return;
+        }
+
+        // Only add logout event listener if we haven't been redirected
+        const logoutBtn = document.getElementById('logout');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                sessionStorage.removeItem('userType');
+                window.location.href = 'index.html';
+            });
+        }
+    });
+    </script>
     <!-- Header -->
     <header class="page-header">
         <div class="container">
@@ -36,14 +56,14 @@
                 <!-- Profile Card -->
                 <div class="profile-card">
                     <div class="profile-image">
-                        <img src="images/member/anish.jpg" alt="Anish Patni">
+                        <img src="images/member/Shashank.JPG" alt="Shashank Lomte">
                     </div>
                     <div class="profile-info">
-                        <h2>Anish Patni</h2>
+                        <h2>Shashank Lomte</h2>
                         <p class="role">Team Captain</p>
                         <p class="department">Management</p>
                         <div class="contact-info">
-                            <p><i class="fas fa-envelope"></i> anish.patni@somaiya.edu</p>
+                            <p><i class="fas fa-envelope"></i> shashank.lomte@orionracingindia.com</p>
                             <p><i class="fas fa-phone"></i> +91 98765 43210</p>
                         </div>
                     </div>
