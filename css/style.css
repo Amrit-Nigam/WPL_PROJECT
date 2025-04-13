@@ -244,14 +244,52 @@ ul {
   height: 100%;
 }
 
+/* Position nav items in a circle - mathematically correct approach */
 .nav-item {
   position: absolute;
   width: 80px;
   height: 80px;
+  top: 50%;
+  left: 50%;
+  margin-top: -40px; /* Half of height */
+  margin-left: -40px; /* Half of width */
   display: flex;
   justify-content: center;
   align-items: center;
   transition: var(--transition);
+}
+
+.nav-item[data-index="0"] {
+  transform: rotate(270deg) translate(170px) rotate(-270deg);
+}
+
+.nav-item[data-index="1"] {
+  transform: rotate(321.4deg) translate(170px) rotate(-321.4deg);
+}
+
+.nav-item[data-index="2"] {
+  transform: rotate(12.9deg) translate(170px) rotate(-12.9deg);
+}
+
+.nav-item[data-index="3"] {
+  transform: rotate(64.3deg) translate(170px) rotate(-64.3deg);
+}
+
+.nav-item[data-index="4"] {
+  transform: rotate(115.7deg) translate(170px) rotate(-115.7deg);
+}
+
+.nav-item[data-index="5"] {
+  transform: rotate(167.1deg) translate(170px) rotate(-167.1deg);
+}
+
+.nav-item[data-index="6"] {
+  transform: rotate(218.6deg) translate(170px) rotate(-218.6deg);
+}
+
+/* Remove any rotation on the text within nav items */
+.nav-item a {
+  transform: none !important;
 }
 
 .nav-item a {
@@ -266,55 +304,6 @@ ul {
 .nav-item:hover a {
   color: var(--primary-color);
   transform: scale(1.1);
-}
-
-/* Position nav items in a circle - updated for 7 items */
-.nav-item[data-index="0"] {
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%) translateY(-40px);
-}
-.nav-item[data-index="1"] {
-  top: 20%;
-  right: 20%;
-  transform: rotate(45deg);
-}
-.nav-item[data-index="1"] a {
-  transform: rotate(-45deg);
-}
-.nav-item[data-index="2"] {
-  top: 50%;
-  right: 0;
-  transform: translateX(40px);
-}
-.nav-item[data-index="3"] {
-  bottom: 20%;
-  right: 20%;
-  transform: rotate(-45deg);
-}
-.nav-item[data-index="3"] a {
-  transform: rotate(45deg);
-}
-.nav-item[data-index="4"] {
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%) translateY(40px);
-}
-.nav-item[data-index="5"] {
-  bottom: 20%;
-  left: 20%;
-  transform: rotate(45deg);
-}
-.nav-item[data-index="5"] a {
-  transform: rotate(-45deg);
-}
-.nav-item[data-index="6"] {
-  top: 20%;
-  left: 20%;
-  transform: rotate(-45deg);
-}
-.nav-item[data-index="6"] a {
-  transform: rotate(45deg);
 }
 
 /* Hero Content */

@@ -24,45 +24,93 @@ document.addEventListener("DOMContentLoaded", () => {
   const navCenter = document.querySelector(".nav-center")
 
   if (navCenter && navItems.length > 0) {
-    navCenter.addEventListener("mouseenter", () => {
-      navItems.forEach((item) => {
-        item.style.transform = item.style.transform + " scale(1.1)"
-      })
-    })
+    // Define the angles used in the CSS for each nav item position
+    const angles = {
+      "0": 270,
+      "1": 321.4,
+      "2": 12.9,
+      "3": 64.3,
+      "4": 115.7,
+      "5": 167.1,
+      "6": 218.6
+    };
 
-    navCenter.addEventListener("mouseleave", () => {
-      navItems.forEach((item) => {
-        const index = item.getAttribute("data-index")
-
-        // Reset to original positions
-        switch (index) {
-          case "0":
-            item.style.transform = "translateX(-50%) translateY(-40px)"
-            break
-          case "1":
-            item.style.transform = "rotate(45deg)"
-            break
-          case "2":
-            item.style.transform = "translateX(40px)"
-            break
-          case "3":
-            item.style.transform = "rotate(-45deg)"
-            break
-          case "4":
-            item.style.transform = "translateX(-50%) translateY(40px)"
-            break
-          case "5":
-            item.style.transform = "rotate(45deg)"
-            break
-          case "6":
-            item.style.transform = "translateX(-40px)"
-            break
-          case "7":
-            item.style.transform = "rotate(-45deg)"
-            break
+    navItems.forEach((item) => {
+      const index = item.getAttribute('data-index');
+      const angle = angles[index];
+      
+      item.addEventListener("mouseenter", function() {
+        // Scale up but remove background and shadow effects
+        this.style.transform = `rotate(${angle}deg) translate(170px) rotate(-${angle}deg) scale(1.2)`;
+        this.style.zIndex = "10";
+        
+        const link = this.querySelector("a");
+        if (link) {
+          link.style.color = "var(--primary-color)";
+          link.style.fontWeight = "700";
         }
-      })
-    })
+      });
+      
+      item.addEventListener("mouseleave", function() {
+        // Reset to normal state
+        this.style.transform = `rotate(${angle}deg) translate(170px) rotate(-${angle}deg)`;
+        this.style.zIndex = "1";
+        
+        const link = this.querySelector("a");
+        if (link) {
+          link.style.color = "var(--text-color)";
+          link.style.fontWeight = "600";
+        }
+      });
+    });
+  }
+
+  // Add background blur effect for better navbar visibility
+  const heroContent = document.querySelector(".hero-content");
+  const socialLinks = document.querySelector(".social-links");
+  
+  if (heroContent) {
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    hamburgerMenu.addEventListener('click', function() {
+      // Toggle blur effect based on the new state (after class toggle)
+      setTimeout(() => {
+        if (document.body.classList.contains('nav-active')) {
+          // Hide text content completely when navbar is active
+          heroContent.style.opacity = "0";
+          if (socialLinks) socialLinks.style.opacity = "0";
+        } else {
+          // Show text content when navbar is closed
+          heroContent.style.opacity = "1";
+          if (socialLinks) socialLinks.style.opacity = "1";
+        }
+      }, 0);
+    });
+    
+    // Restore text when nav is closed via overlay
+    const navOverlay = document.querySelector('.nav-overlay');
+    if (navOverlay) {
+      navOverlay.addEventListener('click', function() {
+        heroContent.style.opacity = "1";
+        if (socialLinks) socialLinks.style.opacity = "1";
+      });
+    }
+    
+    // Restore text when clicking any nav item
+    const navLinks = document.querySelectorAll('.nav-items a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        heroContent.style.opacity = "1";
+        if (socialLinks) socialLinks.style.opacity = "1";
+      });
+    });
+    
+    // Restore text when pressing Escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        heroContent.style.opacity = "1";
+        if (socialLinks) socialLinks.style.opacity = "1";
+      }
+    });
   }
 
   // Parallax effect for landing page
@@ -166,4 +214,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
