@@ -8,10 +8,129 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/pages.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Make dropdown text visible without hovering */
+        select, option {
+            color: #000000 !important; /* Force black text color */
+            background-color: #ffffff; /* White background */
+        }
+        
+        /* Style for dropdown when focused */
+        select:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+        }
+
+        /* Member card styles */
+        .member-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .member-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .member-card.selected {
+            background: rgba(0, 123, 255, 0.15);
+            border: 1px solid rgba(0, 123, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .member-card.selected::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #007bff;
+            background: rgba(255, 255, 255, 0.2);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .member-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #007bff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .member-info {
+            flex: 1;
+        }
+
+        .member-name {
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .member-role {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .department-tag {
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            margin-left: 8px;
+        }
+
+        .department-mechanical {
+            background-color: rgba(255, 152, 0, 0.2);
+            color: #ff9800;
+        }
+
+        .department-electronics {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+        }
+
+        .department-management {
+            background-color: rgba(33, 150, 243, 0.2);
+            color: #2196f3;
+        }
+        
+        .select-member-hint {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .select-member-hint i {
+            color: #007bff;
+        }
+    </style>
 </head>
 <body>
     <script>
-        // Add this at the top of the body
         document.addEventListener('DOMContentLoaded', function() {
             // Simple session check - in real app, use proper authentication
             if (!sessionStorage.getItem('userType') || sessionStorage.getItem('userType') !== 'admin') {
@@ -42,15 +161,19 @@
                 <!-- Team Overview -->
                 <div class="team-overview">
                     <h2>Team Overview</h2>
+                    <div class="select-member-hint">
+                        <i class="fas fa-info-circle"></i>
+                        Click on a member to assign them a task
+                    </div>
                     <div class="department-filters">
-                        <button class="filter-btn active">All</button>
-                        <button class="filter-btn">Mechanical</button>
-                        <button class="filter-btn">Electronics</button>
-                        <button class="filter-btn">Marketing</button>
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="mechanical">Mechanical</button>
+                        <button class="filter-btn" data-filter="electronics">Electronics</button>
+                        <button class="filter-btn" data-filter="management">Management</button>
                     </div>
                     
-                    <div class="members-list">
-                        <!-- Member cards will be populated here -->
+                    <div class="members-list" id="membersList">
+                        <!-- Member cards will be populated dynamically -->
                     </div>
                 </div>
 
@@ -77,7 +200,7 @@
                                 <div class="form-group">
                                     <label for="assignee">Assign To</label>
                                     <select id="assignee" required>
-                                        <option value="">Select Member</option>
+                                        <option value="">Select Team Member</option>
                                     </select>
                                 </div>
                                 
@@ -116,52 +239,259 @@
     </section>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-    // Filter buttons functionality
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            // Add filtering logic here
-        });
-    });
+            // Define team members with data from team.html
+            const teamMembers = [
+                // Leadership
+                { id: "1", name: "Shashank Lomte", role: "Team Captain", department: "Management" },
+                { id: "2", name: "Niranjan Prajeesh", role: "Chief Technical Officer (CTO) & Chassis Lead", department: "Management" },
+                { id: "3", name: "Samarth Bhagat", role: "Chief Operating Officer (COO)", department: "Management" },
+                
+                // Mechanical Department
+                { id: "4", name: "Ansh Garg", role: "Suspension Lead", department: "Mechanical" },
+                { id: "5", name: "Abhay Rana", role: "Suspension Engineer", department: "Mechanical" },
+                { id: "6", name: "Aaryan Ghag", role: "Suspension Engineer", department: "Mechanical" },
+                { id: "7", name: "Avanish Kamble", role: "Suspension Engineer", department: "Mechanical" },
+                { id: "8", name: "Ankon Mukherjee", role: "Aerodynamics Lead", department: "Mechanical" },
+                { id: "9", name: "Anish Bhatavadekar", role: "Aero Engineer", department: "Mechanical" },
+                { id: "10", name: "Mihir Kotwal", role: "Powertrain Lead", department: "Mechanical" },
+                { id: "11", name: "Amitesh Kumar", role: "Chassis Engineer", department: "Mechanical" },
+                { id: "12", name: "Aaron Crasto", role: "Brakes/Cooling Lead", department: "Mechanical" },
+                
+                
+                // Electronics Department
+                { id: "13", name: "Agraj Dubey", role: "Electronics Lead", department: "Electronics" },
+                { id: "14", name: "Dhaarmi Gala", role: "Safety and VI Lead", department: "Electronics" },
+                { id: "15", name: "Anish Patni", role: "Safety and VI Engineer", department: "Electronics" },
+                { id: "16", name: "Abhishek Dubey", role: "Accumulator Lead", department: "Electronics" },
+                { id: "17", name: "Siddhant Wani", role: "Accumulator Engineer", department: "Electronics" },
+                { id: "18", name: "Harshvardan Singh", role: "DAQ Lead", department: "Electronics" },
+                { id: "19", name: "Sai Parcha", role: "DAQ Engineer", department: "Electronics" },
+                { id: "20", name: "Rishi Satish", role: "DAQ Engineer", department: "Electronics" },
+                { id: "21", name: "Dhiti Wadhwa", role: "ECU", department: "Electronics" },
+                { id: "22", name: "Yash Shenoy", role: "ECU", department: "Electronics" },
+                { id: "23", name: "Aryan Navalkar", role: "BMS Engineer", department: "Electronics" }
+            ];
+            
+            // Populate members list in the team overview section
+            const membersList = document.getElementById('membersList');
+            const assigneeDropdown = document.getElementById('assignee');
+            let selectedMemberId = null;
+            
+            function populateMembers(members) {
+                membersList.innerHTML = '';
+                
+                members.forEach(member => {
+                    // Get department class
+                    let deptClass = "";
+                    switch(member.department.toLowerCase()) {
+                        case "mechanical":
+                            deptClass = "department-mechanical";
+                            break;
+                        case "electronics":
+                            deptClass = "department-electronics";
+                            break;
+                        case "management":
+                            deptClass = "department-management";
+                            break;
+                    }
+                    
+                    // Create initials for avatar
+                    const nameParts = member.name.split(' ');
+                    const initials = nameParts.map(part => part[0]).join('');
+                    
+                    // Create member card
+                    const memberCard = document.createElement('div');
+                    memberCard.className = 'member-card';
+                    memberCard.dataset.department = member.department.toLowerCase();
+                    memberCard.dataset.memberId = member.id;
+                    
+                    // Add selected class if this member is selected
+                    if (member.id === selectedMemberId) {
+                        memberCard.classList.add('selected');
+                    }
+                    
+                    memberCard.innerHTML = `
+                        <div class="member-avatar">${initials}</div>
+                        <div class="member-info">
+                            <div class="member-name">
+                                ${member.name}
+                                <span class="department-tag ${deptClass}">${member.department}</span>
+                            </div>
+                            <div class="member-role">${member.role}</div>
+                        </div>
+                    `;
+                    
+                    // Add click event to select member for task assignment
+                    memberCard.addEventListener('click', function() {
+                        // Set dropdown value
+                        assigneeDropdown.value = member.id;
+                        
+                        // Update selected state
+                        selectedMemberId = member.id;
+                        
+                        // Remove selected class from all cards
+                        document.querySelectorAll('.member-card').forEach(card => {
+                            card.classList.remove('selected');
+                        });
+                        
+                        // Add selected class to this card
+                        memberCard.classList.add('selected');
+                        
+                        // Smooth scroll to task form
+                        document.querySelector('.task-form').scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        
+                        // Flash animation on the assignee dropdown
+                        assigneeDropdown.style.transition = 'background-color 0.3s ease';
+                        assigneeDropdown.style.backgroundColor = 'rgba(0, 123, 255, 0.2)';
+                        setTimeout(() => {
+                            assigneeDropdown.style.backgroundColor = '';
+                        }, 1000);
+                    });
+                    
+                    membersList.appendChild(memberCard);
+                });
+            }
+            
+            // Initial population
+            populateMembers(teamMembers);
+            
+            // Filter buttons functionality
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filter = this.dataset.filter;
+                    
+                    if (filter === 'all') {
+                        populateMembers(teamMembers);
+                    } else {
+                        const filteredMembers = teamMembers.filter(
+                            member => member.department.toLowerCase() === filter
+                        );
+                        populateMembers(filteredMembers);
+                    }
+                });
+            });
 
-    // Task form submission
-    const taskForm = document.getElementById('taskForm');
-    taskForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        // Add task submission logic here
-        console.log('Task assigned');
-        this.reset();
-    });
+            // Set minimum date for deadline to today
+            const deadlineInput = document.getElementById('deadline');
+            const today = new Date();
+            const formattedDate = today.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+            deadlineInput.setAttribute('min', formattedDate);
 
-    // Logout functionality
-    const logoutBtn = document.getElementById('logout');
-    logoutBtn.addEventListener('click', function() {
-        sessionStorage.removeItem('userType');
-        window.location.href = 'index.html';
-    });
-});
-    </script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Check if user is logged in as admin
-        const userType = sessionStorage.getItem('userType');
-        if (!userType || userType !== 'admin') {
-            window.location.href = 'members.html';
-            return;
-        }
+            // Populate team members in the assignee dropdown
+            
+            // Clear existing options (except the first one)
+            while (assigneeDropdown.options.length > 1) {
+                assigneeDropdown.remove(1);
+            }
+            
+            // Add team members to dropdown
+            teamMembers.forEach(member => {
+                const option = document.createElement('option');
+                option.value = member.id;
+                option.textContent = `${member.name} (${member.department} - ${member.role})`;
+                assigneeDropdown.appendChild(option);
+            });
+            
+            // Listen for changes in the dropdown to update selected member card
+            assigneeDropdown.addEventListener('change', function() {
+                selectedMemberId = this.value;
+                
+                // Update selected state in member cards
+                document.querySelectorAll('.member-card').forEach(card => {
+                    if (card.dataset.memberId === selectedMemberId) {
+                        card.classList.add('selected');
+                        
+                        // Scroll the selected card into view if it's not visible
+                        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    } else {
+                        card.classList.remove('selected');
+                    }
+                });
+            });
 
-        // Only add logout event listener if we haven't been redirected
-        const logoutBtn = document.getElementById('logout');
-        if (logoutBtn) {
-            logoutBtn.addEventListener('click', function(e) {
+            // Task form submission
+            const taskForm = document.getElementById('taskForm');
+            taskForm.addEventListener('submit', function(e) {
                 e.preventDefault();
+                
+                // Get selected member details
+                const selectedMemberId = document.getElementById('assignee').value;
+                const selectedMember = teamMembers.find(member => member.id === selectedMemberId);
+                
+                // Get form values
+                const taskData = {
+                    id: Date.now(), // Unique ID based on timestamp
+                    title: document.getElementById('taskTitle').value,
+                    description: document.getElementById('taskDescription').value,
+                    assigneeId: selectedMemberId,
+                    assigneeName: selectedMember.name,
+                    assigneeRole: selectedMember.role,
+                    assigneeDept: selectedMember.department,
+                    priority: document.getElementById('priority').value,
+                    deadline: document.getElementById('deadline').value,
+                    status: document.getElementById('status').value,
+                    dateAssigned: new Date().toISOString().split('T')[0]
+                };
+                
+                // Get existing tasks or create empty array
+                let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+                
+                // Add new task
+                tasks.push(taskData);
+                
+                // Save to localStorage
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+                
+                // Show success message
+                showNotification('Task assigned successfully!');
+                
+                // Reset the form and selection state
+                this.reset();
+                selectedMemberId = null;
+                document.querySelectorAll('.member-card').forEach(card => {
+                    card.classList.remove('selected');
+                });
+            });
+            
+            // Function to show notification
+            function showNotification(message) {
+                const notification = document.createElement('div');
+                notification.className = 'notification';
+                notification.textContent = message;
+                
+                document.body.appendChild(notification);
+                
+                // Show notification
+                setTimeout(() => {
+                    notification.style.opacity = '1';
+                    notification.style.transform = 'translateY(0)';
+                }, 10);
+                
+                // Hide notification after 3 seconds
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    notification.style.transform = 'translateY(20px)';
+                    
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 300);
+                }, 3000);
+            }
+            
+            // Logout functionality
+            const logoutBtn = document.getElementById('logout');
+            logoutBtn.addEventListener('click', function() {
                 sessionStorage.removeItem('userType');
                 window.location.href = 'index.html';
             });
-        }
-    });
-</script>
+        });
+    </script>
 </body>
 </html>
